@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&family=Tinos:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Chivo+Mono:wght@400;700&family=Tinos:wght@400;700&display=swap');
+.App {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/soccer-players-action-professional-stadium.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  margin: 1rem;
+  text-align: center;
+}
+
+.nav {
+  background-color: #366cda;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+#title {
+  color: #2a3c69;
+  font-family: 'Chivo Mono', monospace;
+  font-weight: bold;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  font-size: 2rem;
+  border: none;
+  text-decoration: none;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 1000ms;
+
+}
+#title:hover{
+  color: #61dafb;
+  text-shadow: 0 0 50px #61dafb;
+
+}
+
+.nav ul {
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+}
+
+.nav a {
+  color: inherit;
+  font-family: 'Chivo Mono', monospace;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-left: 4px solid #031870;
+}
+
+.nav li.active {
+  background-color: #031870;
+
+}
+
+.nav li:hover {
+  transition: all 500ms;
+  background-color: #031870;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
