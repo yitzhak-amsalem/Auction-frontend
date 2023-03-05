@@ -1,30 +1,38 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {sendApiPostRequest} from "../services/ApiUserRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
+import ErrorMessage from "../ErrorMessage";
+import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Login() {
     const [isActive, setIsActive] = useState(false);
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [userToken, setUserToken] = useState("");
-    let numOfAuctions = 0
-    let numOfBets = 0
-    let numOfUsers = 0
+    const[errorCode, setErrorCode] = useState(0);
+    const[numOfAuctions, setNumOfAuctions] = useState(0);
+    const[numOfBets, setNumOfBets] = useState(0);
+    const[numOfUsers, setNumOfUsers] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = Cookies.get("token");
+        if (token == undefined) {
+        } else {
+            navigate("../dashboard")
+        }
+    }, [])
 
     const updateIsActive = () => {
-        sendApiPostRequest("http://localhost:8989/login", {userName: userName, password: password}, (response) => {
+        sendApiPostRequest("http://localhost:8989/login", {username: userName, password: password}, (response) => {
             if (response.data.success) {
-                setIsActive(true);
-                setUserToken(response.data.userToken)
-                setUserName("");
-                setPassword("");
+                setErrorCode(0)
+                Cookies.set("token", response.data.token);
+                navigate("../dashboard")
             } else {
-                if (response.data.errorCode === 1) {
-                    alert("The password isn't correct");
-                } else {
-                    alert("The username isn't correct");
-                }
+                setErrorCode(response.data.errorCode);
             }
         })
     }
@@ -35,19 +43,13 @@ function Login() {
     const updatePassword = (e) => {
         setPassword(e.target.value);
     }
-    const logOut = () => {
-        setIsActive(false);
-        setUserToken("");
-    }
+  const signup=()=>{
+      navigate("../SignUp")
+  }
 
     return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             {
-                isActive ?
-                    <div>
-                        <button id={"sign-out-button"} onClick={logOut}>Sign out</button>
-                    </div>
-                    :
                     <div className={"login-form"}>
                         <h1>Login Form</h1>
                         <div className={"login-container"}>
@@ -71,8 +73,16 @@ function Login() {
                                 onChange={updatePassword}
                                 required
                             />
+
+                            {
+                                errorCode > 0 &&
+                                <ErrorMessage errorCode={errorCode} lineBreak={true}/>
+                            }
                             <button id={"sign-in-button"} disabled={userName.length === 0 || password.length === 0}
                                     onClick={updateIsActive}>Sign In
+                            </button>
+                            <button id={"sign-up-button"}
+                                    onClick={signup}>Create new account
                             </button>
                         </div>
                         <h1>{numOfUsers} users are in the system</h1>

@@ -7,6 +7,7 @@ import MyProducts from "./pages/MyProducts";
 import MyOffers from "./pages/./MyOffers";
 import Navbar from "./components/Navbar"
 import AdminControl from "./pages/AdminControl";
+import SignUp from "./pages/SignUp";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <div>
             <Routes>
               <Route path={"/login"} element={<Login/>}/>
+                <Route path={"/SignUp"} element={<SignUp/>}/>
               <Route path={"/dashboard"} element={<Dashboard/>}/>
               <Route path={"/my-offers"} element={<MyOffers/>}/>
               <Route path={"/my-products"} element={<MyProducts/>}/>

@@ -11,6 +11,27 @@ function ErrorMessage(props) {
         case 1008:
             message = "You overdid it! You don't have enough credit.";
             break;
+        case 1002:
+            message = "Username is required!";
+            break;
+        case 1003:
+            message = "Password is required!";
+            break;
+        case 1004:
+            message = "Password is weak!";
+            break;
+        case 1005:
+            message = "Username already taken";
+            break;
+        case 1006:
+            message = "Wrong username or password";
+            break;
+        case 1007:
+            message = "Passwords Don't match";
+            break;
+        case 1008:
+            message = "Password too weak";
+            break;
     }
     return (
         <span style={{color: "red"}}>
