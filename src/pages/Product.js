@@ -12,21 +12,21 @@ export default function Product() {
     let { productID } = useParams();
     const [amount, setAmount] = useState(0);
     const [success, setSuccess] = useState(false);
-    const [token, setToken] = useState("5D96A0ED166A05B49DA80A031752FE80")
+    const [token, setToken] = useState("")
     const [error, setError] = useState(0);
     const [auction, setAuction] = useState(undefined)
 
     useEffect(() => {
-        //setToken(Cookies.get("token"))
+        const token = Cookies.get("token");
         if (token === undefined) {
             navigate("../login");
         } else {
             console.log(productID)
             getAuctionDetails(productID, token, (response) => {
                 if (response.data.success) {
+                    setToken(token)
                     setAuction(response.data.auction)
                     console.log(auction)
-
                 } else {
                     return(
                         <ErrorMessage errorCode={response.data.errorCode} lineBreak={true}/>

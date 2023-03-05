@@ -14,7 +14,7 @@ export default function Dashboard() {
 
     return (
         <div className={"auction-table"}>
-            <DrawProduct table={auctionTable}/>    //TODO filter this with search- to ask dvir and itzchk ho we want to tdo this
+               //TODO filter this with search- to ask dvir and itzchk ho we want to tdo this
         </div>
     );
 }
