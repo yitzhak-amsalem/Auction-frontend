@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {sendApiPostRequest} from "../services/ApiUserRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 import ErrorMessage from "../ErrorMessage";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import {AuthContext} from "../components/AuthProvider";
 
 function Login() {
     const [isActive, setIsActive] = useState(false);
@@ -16,10 +17,12 @@ function Login() {
     const[numOfBets, setNumOfBets] = useState(0);
     const[numOfUsers, setNumOfUsers] = useState(0);
     const navigate = useNavigate();
+    const { setUpdateNavbar } = useContext(AuthContext);
+
 
     useEffect(() => {
         const token = Cookies.get("token");
-        if (token == undefined) {
+        if (token === undefined) {
         } else {
             navigate("../dashboard")
         }
@@ -30,6 +33,7 @@ function Login() {
             if (response.data.success) {
                 setErrorCode(0)
                 Cookies.set("token", response.data.token);
+                setUpdateNavbar(true)
                 navigate("../dashboard")
             } else {
                 setErrorCode(response.data.errorCode);

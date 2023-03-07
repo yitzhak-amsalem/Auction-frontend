@@ -9,16 +9,19 @@ import Navbar from "./components/Navbar"
 import AdminControl from "./pages/AdminControl";
 import SignUp from "./pages/SignUp";
 import Cookies from "js-cookie";
+import AuthProvider from "./components/AuthProvider";
 
 
 function App() {
 
     return (
         <>
+            <AuthProvider>
             <Navbar/>
             <div className="container">
                 <div>
                     <Routes>
+                        <Route path={"/"} element={<Login/>}/>
                         <Route path={"/login"} element={<Login/>}/>
                         <Route path={"/sign-up"} element={<SignUp/>}/>
                         <Route path={"/dashboard"} element={<Dashboard/>}/>
@@ -26,10 +29,10 @@ function App() {
                         <Route path={"/my-products"} element={<MyProducts/>}/>
                         <Route path={"/product/:productID"} element={<Product/>}/>
                         <Route path={"/admin-control"} element={<AdminControl/>}/>
-
                     </Routes>
                 </div>
             </div>
+            </AuthProvider>
         </>
     )
 }
