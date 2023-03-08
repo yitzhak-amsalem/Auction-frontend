@@ -10,6 +10,43 @@
     height: 100px;
 }
 
-.product {
+.product-page{
     text-align: center;
+    direction: ltr;
+}
+
+.button {
+    margin: 15px;
+    height: auto;
+    width: auto;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1em;
+    border: 2px solid #790000;
+    padding: 7px;
+    background-color: #fab2b2;
+    border-radius: 10px;
+}
+
+.button:hover:enabled{
+    background-color: #790000;
+    transition: all 500ms;
+    color: white;
+}
+
+#success-message{
+    background-color: rgba(160, 229, 152, 0.81);
+    font-family: 'Chivo Mono', monospace;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+    padding: 7px;
+    color: #1e8a13;
+}
+
+#error-message{
+    background-color: rgba(236, 166, 166, 0.77);
+    font-family: 'Chivo Mono', monospace;
+    border-radius: 10px;
+    padding: 7px;
+    color: #e00707;
 }

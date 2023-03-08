@@ -8,16 +8,17 @@ import "../css/Table.css"
 export default function MyOffers() {
     const [myOffers, setMyOffers] = useState([]);
     const navigate = useNavigate();
-    const [token, setToken] = useState("5D96A0ED166A05B49DA80A031752FE80")
+    const [token, setToken] = useState("")
 
 
     useEffect(() => {
-        //setToken(Cookies.get("token"));
+        const token = Cookies.get("token");
         if (token === undefined) {
             navigate("../login");
         } else {
             getMyOffers(token, (response) => {
                 setMyOffers(response.data)
+                setToken(token)
             })
         }
     },[])

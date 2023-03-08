@@ -21,15 +21,66 @@
   gap: 1rem;
   padding: 0 1rem;
 }
+.site-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title-element{
+  padding: 1px;
+  color: #620606;
+  margin-left: 20px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#title-username{
+  border: 1px solid #620606;
+  background-color: #eeaaaa;
+  margin-bottom: 15px;
+  padding: 7px;
+  transition: all 500ms;
+  font-size: 1.1em;
+  width: 40px;
+  text-align: center;
+  border-radius: 45%;
+}
+#title-username:hover{
+  background-color: #881212;
+  color: #f89e9e;
+  transition: all 500ms;
+}
+
+
+#title-button{
+  margin-bottom: 15px;
+  border: 1px solid #620606;
+  background-color: #eeaaaa;
+  padding: 7px;
+  border-radius: 15px;
+  transition: all 500ms;
+  font-size: 1.1em;
+
+}
+
+#title-button:hover{
+  background-color: #881212;
+  color: #f89e9e;
+  transition: all 500ms;
+}
+
+#title-credit{
+  font-weight: bold;
+  font-size: 1.1em;
+}
 
 #title {
-  color: #6b0000;
-  font-family: 'Ubuntu', sans-serif;
+  color: #750000;
+  font-size: 1.5em;
   font-weight: bold;
-  margin: 0;
+  margin: 0 0 0 20px;
   list-style: none;
   display: flex;
-  font-size: 2rem;
   border: none;
   text-decoration: none;
   align-items: center;
@@ -71,7 +122,6 @@
   transition: all 500ms;
   background-color: #720000;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

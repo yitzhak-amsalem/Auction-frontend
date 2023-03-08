@@ -33,7 +33,7 @@ export default function MyProducts() {
 
     return (
         <div className={"My-Products"}>
-            <DrawProduct table={MyProducts} onClick={() => goToProduct(offer.productID)}/>
+
         </div>
     );
 
