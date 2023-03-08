@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getProduct = (token, callback) => {
+export const getMyProducts = (token, callback) => {
     axios.get("http://localhost:8989/get-my-products",
         {
             params: token
