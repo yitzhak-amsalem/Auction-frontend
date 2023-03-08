@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {getAuctionTable} from "../services/GetTable";
+import {getAllAuctions, getAuctionTable} from "../services/GetAdmins";
 import DrawProduct from "../components/DrawProduct";
 
 export default function Dashboard() {
     const [auctionTable, setAuctionTable] = useState([]);
 
     useEffect(() => {
-        getAuctionTable( (response) => {
+        getAllAuctions( (response) => {
             const updatedTable = response.data;
             setAuctionTable(updatedTable);
         })

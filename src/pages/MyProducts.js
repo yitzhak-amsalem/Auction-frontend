@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import {getMyProducts} from "../services/GetMyProducts";
+import ErrorMessage from "../ErrorMessage";
 
 
 export default function MyProducts() {
-
-    const [MyProducts, setMyProducts] = useState([]);
+    const [myProducts, setMyProducts] = useState([]);
     const [token, setToken] = useState("")
+    const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
 
 
@@ -17,18 +18,22 @@ export default function MyProducts() {
             navigate("../login");
         } else {
             getMyProducts(token, (response) => {
-                setMyProducts(response.data)
+                if (response.data.success) {
+                    setSuccess(response.data.success)
+                    setMyProducts(response.data.myProducts)
+                }
+                setToken(token)
             })
         }
     }, [])
     const goToProduct = (productID) => {
         navigate(`/product/${productID}`)
+    }
 
-
-        return (
-            <div id={"my-Offers-table"}>
-                {
-                    MyProducts.length > 0 &&
+    return (
+        <div className={"my-details-table"}>
+            {
+                myProducts.length > 0 ?
                     <table>
                         <thead>
                         <tr id={"table-row-header"}>
@@ -39,7 +44,7 @@ export default function MyProducts() {
                         </thead>
                         <tbody>
                         {
-                            MyProducts.map((product, i) => {
+                            myProducts.map((product, i) => {
                                 return (
                                     <tr style={{cursor: "pointer"}} onClick={() => goToProduct(product.productID)}
                                         key={i}>
@@ -52,11 +57,17 @@ export default function MyProducts() {
                         }
                         </tbody>
                     </table>
-                }
-
-            </div>
-        );
-
-    }
-
+                    :
+                    <div>
+                        {
+                            success &&
+                            <div className={"error-message"}
+                                 style={{fontSize: "2.5em", marginTop: "50px", backgroundColor: ""}}>
+                                Your don't have any product.
+                            </div>
+                        }
+                    </div>
+            }
+        </div>
+    );
 }

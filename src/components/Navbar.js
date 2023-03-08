@@ -10,6 +10,7 @@ export default function Navbar() {
     const projectUrl = "https://github1s.com/yitzhak-amsalem/Auction-Client/blob/HEAD/src/App.js"
     const [token, setToken] = useState()
     const [credit, setCredit] = useState(0)
+    const [isAdmin, setIsAdmin] = useState(false)
     const [username, setUsername] = useState("")
     const [success, setSuccess] = useState(false)
     const navigate = useNavigate();
@@ -23,7 +24,9 @@ export default function Navbar() {
             getUserDetails(token, (response) => {
                 if (response.data.success) {
                     setCredit(response.data.credit)
+                    console.log("admin: " + response.data.admin)
                     setUsername(response.data.username)
+                    setIsAdmin(response.data.admin)
                     setToken(token)
                 }
                 setSuccess(response.data.success)
@@ -51,7 +54,12 @@ export default function Navbar() {
                         <ul>
                             <CustomLink to="/my-products">My Products</CustomLink>
                             <CustomLink to="/my-offers">My Offers</CustomLink>
+                            {
+                                isAdmin &&
+                                <CustomLink to="/admin-control">Admin Control</CustomLink>
+                            }
                         </ul>
+
                         <div className="site-title">
                             <button className="title-element" id={"title-username"} onClick={goToDashboard}>
                                 {username.slice(0, 1).toUpperCase()}

@@ -11,8 +11,12 @@
 }
 
 .product-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 30px;
     text-align: center;
-    direction: ltr;
 }
 
 .button {
@@ -33,7 +37,7 @@
     color: white;
 }
 
-#success-message{
+.success-message{
     background-color: rgba(160, 229, 152, 0.81);
     font-family: 'Chivo Mono', monospace;
     border-radius: 10px;
@@ -43,7 +47,7 @@
     color: #1e8a13;
 }
 
-#error-message{
+.error-message{
     background-color: rgba(236, 166, 166, 0.77);
     font-family: 'Chivo Mono', monospace;
     border-radius: 10px;

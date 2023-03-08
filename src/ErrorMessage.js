@@ -32,9 +32,10 @@ function ErrorMessage(props) {
         case 1009:
             message = "Auction is closed.";
             break;
+
     }
     return (
-        <span id={"error-message"}>
+        <span className={"error-message"}>
             {
                 props.lineBreak ?
                     <div>

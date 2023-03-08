@@ -47,7 +47,7 @@ function Login() {
     const updatePassword = (e) => {
         setPassword(e.target.value);
     }
-  const signup=()=>{
+  const signup = () => {
       navigate("../SignUp")
   }
 
@@ -91,7 +91,7 @@ function Login() {
                         </div>
                         <h1>{numOfUsers} users are in the system</h1>
                         <h1>{numOfAuctions} auction are uploded to the system</h1>
-                        <h1>{numOfBets} Bets were  auctioned in the system</h1>
+                        <h1>{numOfBets} Bets were auctioned in the system</h1>
                     </div>
             }
         </div>

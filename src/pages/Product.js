@@ -8,16 +8,18 @@ import {sendApiPostRequest} from "../services/ApiUserRequests";
 import ErrorMessage from "../ErrorMessage";
 import {TextField} from "@mui/material";
 import {AuthContext} from "../components/AuthProvider";
+import {getUserDetails} from "../services/GetUserDetails";
 
 export default function Product() {
     const navigate = useNavigate();
     let {productID} = useParams();
     const [amount, setAmount] = useState(0);
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(undefined);
     const [token, setToken] = useState("")
     const [errorCode, setErrorCode] = useState(0);
     const [auction, setAuction] = useState(undefined)
-    const { setUpdateNavbar } = useContext(AuthContext);
+    const [username, setUsername] = useState("")
+    const {setUpdateNavbar} = useContext(AuthContext);
 
     const updateAuction = () => {
         const token = Cookies.get("token");
@@ -30,6 +32,11 @@ export default function Product() {
                     setSuccess(false)
                     setErrorCode(0)
                 }, 3000)
+            }
+        })
+        getUserDetails(token, (response) => {
+            if (response.data.success) {
+                setUsername(response.data.username)
             }
         })
     }
@@ -54,7 +61,7 @@ export default function Product() {
             }, 3000)
             setAmount(0)
             updateAuction(token)
-            if (response.data.success){
+            if (response.data.success) {
                 setUpdateNavbar(true)
             }
         })
@@ -68,22 +75,32 @@ export default function Product() {
                         {/*<DrawProduct productToPaint={auction.productObj}/>*/}
                         <p>Opening Date: {auction.openingDate}</p>
                         <p>Sum offers: {auction.sumOffers}</p>
-                        <p>My Offers:</p>
-                        {
-                            auction.myOffers.length > 0 ?
-                                auction.myOffers.map((offer, i) => {
-                                    return (
-                                        <div key={i} style={{direction: "ltr"}}>
-                                            {(i + 1) + ". " + offer.amountOffer}
-                                        </div>
-                                    )
-                                })
-                                :
-                                <div>טרם הצעת הצעות למוצר זה</div>
-                        }
-                        <p>Auction Owner: {auction.productObj.owner.username}</p>
+                        <p>
+                            {
+                                auction.productObj.owner.username === username ?
+                                    <p> Your the owner of this auction </p>
+                                    :
+                                    <div>
+                                        <p>My Offers:</p>
+                                        {
+                                            auction.myOffers.length > 0 ?
+                                                auction.myOffers.map((offer, i) => {
+                                                    return (
+                                                        <div key={i} style={{direction: "ltr"}}>
+                                                            {(i + 1) + ". " + offer.amountOffer}
+                                                        </div>
+                                                    )
+                                                })
+                                                :
+                                                <div>טרם הצעת הצעות למוצר זה</div>
+                                        }
+                                        <p>Auction Owner: {auction.productObj.owner.username}</p>
+                                    </div>
+                            }
+                        </p>
                         {
                             auction.isOpen ?
+                                auction.productObj.owner.username !== username &&
                                 <div style={{
                                     margin: "15px",
                                     display: "flex",
@@ -110,7 +127,7 @@ export default function Product() {
                                     {
                                         (success && errorCode === null) ?
                                             <>
-                                                <div id={"success-message"}>The offer send successfully</div>
+                                                <div className={"success-message"}>The offer send successfully</div>
                                             </>
                                             :
                                             errorCode > 0 &&
@@ -122,10 +139,13 @@ export default function Product() {
                         }
                     </div>
                     :
-                    <div style={{fontSize: "2.5em", marginTop: "50px"}}>
+                    <div>
                         {
-                            errorCode > 0 &&
-                            <ErrorMessage errorCode={errorCode} lineBreak={true}/>
+                            success !== undefined &&
+                            <div className={"error-message"}
+                                 style={{fontSize: "2.5em", marginTop: "50px", backgroundColor: ""}}>
+                                No such product.
+                            </div>
                         }
                     </div>
             }
