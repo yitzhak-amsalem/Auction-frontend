@@ -1,5 +1,5 @@
+import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiUserRequests";
 import React, {useContext, useEffect, useState} from "react";
-import {sendApiPostRequest} from "../services/ApiUserRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 import ErrorMessage from "../ErrorMessage";
@@ -23,6 +23,16 @@ function Login() {
     useEffect(() => {
         const token = Cookies.get("token");
         if (token === undefined) {
+            sendApiGetRequest("http://localhost:8989/get-statistics", (response) => {
+                if (response.data.success) {
+                    setErrorCode(0)
+                    setNumOfUsers(response.data.statisticsModel.numOfUsers)
+                    setNumOfBets(response.data.statisticsModel.numOfOffers)
+                    setNumOfAuctions(response.data.statisticsModel.numOfAuction)
+                } else {
+                    setErrorCode(response.data.errorCode);
+                }
+            })
         } else {
             navigate("../dashboard")
         }
@@ -47,10 +57,10 @@ function Login() {
     const updatePassword = (e) => {
         setPassword(e.target.value);
     }
+
   const signup = () => {
       navigate("../SignUp")
   }
-
     return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             {
