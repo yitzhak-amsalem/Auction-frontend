@@ -1,11 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Chivo+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Tinos:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Chivo+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Tinos:wght@400;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 #product-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
+    width: 25%;
+    height: 25%;
+    font-size: 2.3em;
+}
+img {
+    width: 220px;
+    height: 220px;
+    border: 3px solid #dc1414;
+    border-radius: 10%;
+    margin: 20px;
+    padding: 5px;
+}
+div > p {
+    margin: 8px;
+}
+
+.product-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 30px;
+    text-align: center;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1.3em;
+}
+
+.button {
+    margin: 15px;
+    height: auto;
+    width: auto;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1em;
+    border: 2px solid #790000;
+    padding: 7px;
+    background-color: #fab2b2;
+    border-radius: 10px;
+}
+
+.button:hover:enabled{
+    background-color: #790000;
+    transition: all 500ms;
+    color: white;
+}
+
+.success-message{
+    background-color: rgba(160, 229, 152, 0.81);
+    font-family: 'Chivo Mono', monospace;
+    border-radius: 10px;
+    align-items: center;
+    align-content: center;
+    padding: 7px;
+    color: #1e8a13;
+}
+
+.error-message{
+    background-color: rgba(236, 166, 166, 0.77);
+    font-family: 'Chivo Mono', monospace;
+    border-radius: 10px;
+    padding: 7px;
+    color: #e00707;
 }

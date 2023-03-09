@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
 import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiUserRequests";
+import React, {useContext, useEffect, useState} from "react";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 import ErrorMessage from "../ErrorMessage";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import {AuthContext} from "../components/AuthProvider";
 
 function Login() {
     const [isActive, setIsActive] = useState(false);
@@ -16,10 +17,12 @@ function Login() {
     const[numOfBets, setNumOfBets] = useState(0);
     const[numOfUsers, setNumOfUsers] = useState(0);
     const navigate = useNavigate();
+    const { setUpdateNavbar } = useContext(AuthContext);
+
 
     useEffect(() => {
         const token = Cookies.get("token");
-        if (token == undefined) {
+        if (token === undefined) {
             sendApiGetRequest("http://localhost:8989/get-statistics", (response) => {
                 if (response.data.success) {
                     setErrorCode(0)
@@ -40,6 +43,7 @@ function Login() {
             if (response.data.success) {
                 setErrorCode(0)
                 Cookies.set("token", response.data.token);
+                setUpdateNavbar(true)
                 navigate("../dashboard")
             } else {
                 setErrorCode(response.data.errorCode);
@@ -53,10 +57,10 @@ function Login() {
     const updatePassword = (e) => {
         setPassword(e.target.value);
     }
-  const signup=()=>{
+
+  const signup = () => {
       navigate("../SignUp")
   }
-
     return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             {
@@ -97,7 +101,7 @@ function Login() {
                         </div>
                         <h1>{numOfUsers} users are in the system</h1>
                         <h1>{numOfAuctions} auction are uploded to the system</h1>
-                        <h1>{numOfBets} Bets were  auctioned in the system</h1>
+                        <h1>{numOfBets} Bets were auctioned in the system</h1>
                     </div>
             }
         </div>

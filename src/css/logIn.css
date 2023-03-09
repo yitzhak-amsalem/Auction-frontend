@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Chivo+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Tinos:wght@400;700&family=Ubuntu:wght@400;500;700&display=swap');
 .goals-input {
     width: 50px;
 }
 
 .login-form{
-    border: 2px solid rgba(149, 245, 193, 0.5);
+    border: 2px solid rgba(248, 89, 89, 0.5);
     border-radius: 15px;
     margin-top: 30px;
     padding: 5px;
-    background-color: rgba(221, 246, 232, 0.7);
-    box-shadow: 0 0 15px #02864c;
+    background-color: rgba(250, 214, 214, 0.7);
+    box-shadow: 0 0 15px #b25252;
     display: flex;
     align-items: start;
     flex-direction: column;
@@ -18,8 +19,8 @@
     border-radius: 15px;
     margin: 5px;
     padding: 50px;
-    background-color: rgba(221, 246, 232, 0.5);
-    border: 1px solid rgba(55, 203, 123, 0.4);
+    background-color: rgba(250, 233, 233, 0.5);
+    border: 1px solid rgba(203, 55, 55, 0.4);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -27,7 +28,7 @@
 
 h1 {
     font-family: 'Chivo Mono', monospace;
-    color: rgb(1, 91, 43);
+    color: rgb(91, 1, 1);
     font-size: 2.2em;
     text-align: left;
     margin: 15px 0 5px 15px;
@@ -42,51 +43,18 @@ button {
     cursor: pointer;
 }
 
-#add-game-button {
-    width: 45px;
-    border-radius: 50%;
-    border: 2px solid #00654c;
-    cursor: auto;
-
-}
-
-#add-game-button:hover:enabled {
-    background-color: #01503d;
-    transition: all 500ms;
-    color: white;
-    width: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-
-}
-
-#sign-out-button {
-    font-family: 'Chivo Mono', monospace;
-    border: none;
-    background-color: rgba(98, 245, 203, 0.8);
-    margin-top: 50px;
-
-}
-
-#sign-out-button:hover {
-    background-color: #00795a;
-    transition: all 500ms;
-    color: white;
-}
-
 #sign-in-button {
     margin-top: 30px;
     font-family: 'Chivo Mono', monospace;
     border: none;
-    background-color: #8fe1bc;
+    background-color: #e18f8f;
     cursor: auto;
 }
 
 #sign-in-button:hover:enabled {
-    background-color: #00795a;
+    background-color: #790000;
     transition: all 500ms;
     color: white;
     cursor: pointer;
-
 }
 

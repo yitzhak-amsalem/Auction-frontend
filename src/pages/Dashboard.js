@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {getAuctionTable} from "../services/GetTable";
+import {getAllAuctions, getAuctionTable} from "../services/AdminServices";
 import DrawProduct from "../components/DrawProduct";
 
 export default function Dashboard() {
     const [auctionTable, setAuctionTable] = useState([]);
 
     useEffect(() => {
-        getAuctionTable( (response) => {
+        getAllAuctions( (response) => {
             const updatedTable = response.data;
             setAuctionTable(updatedTable);
         })
@@ -14,7 +14,7 @@ export default function Dashboard() {
 
     return (
         <div className={"auction-table"}>
-            <DrawProduct table={auctionTable}/>    //TODO filter this with search- to ask dvir and itzchk ho we want to tdo this
+               //TODO filter this with search- to ask dvir and itzchk ho we want to tdo this
         </div>
     );
 }
