@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {getAllAuctions, getAllUsers} from "../services/AdminServices";
-import {getOpenAuctions} from "../services/AdminServices";
-import DrawProduct from "../components/DrawProduct";
 import {getUserDetails} from "../services/GetUserDetails";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";

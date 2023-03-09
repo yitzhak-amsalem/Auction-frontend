@@ -32,6 +32,15 @@ function ErrorMessage(props) {
         case 1009:
             message = "Auction is closed.";
             break;
+        case 1010:
+            message = "Your without admin access";
+            break;
+        case 1011:
+            message = "Passwords Don't match for admin";
+            break;
+        case 1012:
+            message = "Amount lower than minimum price.";
+            break;
 
     }
     return (

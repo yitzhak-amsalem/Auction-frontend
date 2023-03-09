@@ -71,8 +71,8 @@ export default function Product() {
         <div className={"product-page"}>
             {
                 auction !== undefined ?
-                    <div>
-                        {/*<DrawProduct productToPaint={auction.productObj}/>*/}
+                    <div style={{alignItems: "center", display: "flex", flexDirection: "column"}}>
+                        <DrawProduct productToPaint={auction.productObj}/>
                         <p>Opening Date: {auction.openingDate}</p>
                         <p>Sum offers: {auction.sumOffers}</p>
                         <p>
@@ -80,22 +80,22 @@ export default function Product() {
                                 auction.productObj.owner.username === username ?
                                     <p> Your the owner of this auction </p>
                                     :
-                                    <div>
-                                        <p>My Offers:</p>
+                                    <p>
+                                        <p style={{fontWeight: "bold"}}>My Offers:</p>
                                         {
                                             auction.myOffers.length > 0 ?
                                                 auction.myOffers.map((offer, i) => {
                                                     return (
-                                                        <div key={i} style={{direction: "ltr"}}>
+                                                        <p key={i} style={{display: "block", margin: "5px"}}>
                                                             {(i + 1) + ". " + offer.amountOffer}
-                                                        </div>
+                                                        </p>
                                                     )
                                                 })
                                                 :
-                                                <div>טרם הצעת הצעות למוצר זה</div>
+                                                <p>You have not yet bid on this product</p>
                                         }
                                         <p>Auction Owner: {auction.productObj.owner.username}</p>
-                                    </div>
+                                    </p>
                             }
                         </p>
                         {
@@ -135,7 +135,7 @@ export default function Product() {
                                     }
                                 </div>
                                 :
-                                <div>The auction is closed</div>
+                                <div style={{fontSize: "1.5em", fontWeight: "bold"}}>The auction is closed</div>
                         }
                     </div>
                     :
