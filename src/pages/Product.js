@@ -81,20 +81,24 @@ export default function Product() {
                                     <p> Your the owner of this auction </p>
                                     :
                                     <p>
-                                        <p style={{fontWeight: "bold"}}>My Offers:</p>
                                         {
                                             auction.myOffers.length > 0 ?
-                                                auction.myOffers.map((offer, i) => {
-                                                    return (
-                                                        <p key={i} style={{display: "block", margin: "5px"}}>
-                                                            {(i + 1) + ". " + offer.amountOffer}
-                                                        </p>
-                                                    )
-                                                })
+                                                <>
+                                                    <p style={{fontWeight: "bold"}}>My Offers:</p>
+                                                    {
+                                                        auction.myOffers.map((offer, i) => {
+                                                            return (
+                                                                <p key={i} style={{display: "block", margin: "5px"}}>
+                                                                    {(i + 1) + ". " + offer.amountOffer}
+                                                                </p>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
                                                 :
                                                 <p>You have not yet bid on this product</p>
                                         }
-                                        <p>Auction Owner: {auction.productObj.owner.username}</p>
+                                        <p style={{display: "block"}}>Auction Owner: {auction.productObj.owner.username}</p>
                                     </p>
                             }
                         </p>

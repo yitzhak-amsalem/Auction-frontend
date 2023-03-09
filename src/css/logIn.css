@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Chivo+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Tinos:wght@400;700&family=Ubuntu:wght@400;500;700&display=swap');
-.goals-input {
-    width: 50px;
-}
 
 .login-form{
     border: 2px solid rgba(248, 89, 89, 0.5);
@@ -11,10 +8,14 @@
     background-color: rgba(250, 214, 214, 0.7);
     box-shadow: 0 0 15px #b25252;
     display: flex;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
 }
+.login-type{
+    font-family: 'Chivo Mono', monospace;
+    color: rgb(168, 4, 4);
 
+}
 .login-container {
     border-radius: 15px;
     margin: 5px;
@@ -28,11 +29,19 @@
 
 h1 {
     font-family: 'Chivo Mono', monospace;
-    color: rgb(91, 1, 1);
+    color: rgb(121, 5, 5);
     font-size: 2.2em;
-    text-align: left;
+    text-align: center;
     margin: 15px 0 5px 15px;
-
+}
+h2 {
+    font-family: 'Chivo Mono', monospace;
+    color: rgb(169, 5, 5);
+    font-size: 2em;
+    text-align: center;
+    margin: 10px;
+    padding: 5px;
+    border-right: 3px solid rgba(196, 3, 3, 0.84);
 }
 
 button {
@@ -43,7 +52,7 @@ button {
     cursor: pointer;
 }
 
-#sign-in-button {
+.sign-button {
     margin-top: 30px;
     font-family: 'Chivo Mono', monospace;
     border: none;
@@ -51,10 +60,39 @@ button {
     cursor: auto;
 }
 
-#sign-in-button:hover:enabled {
+.sign-button:hover:enabled {
     background-color: #790000;
     transition: all 500ms;
     color: white;
     cursor: pointer;
 }
+.live-stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 2%;
+    animation: color-change 2s linear infinite;
+    width: 70%;
+    text-align: center;
+    background-color: rgba(239, 201, 201, 0.65);
+    box-shadow: 0 0 4px 4px #a62727;
+}
+@keyframes color-change {
+    0%,100%{
+        box-shadow: 0 0 4px 4px #7e1414;
+    }
 
+    25%{
+        box-shadow: 0 0 4px 4px #cc6565;
+    }
+
+    50%{
+        box-shadow: 0 0 4px 4px #dc8d8d;
+    }
+
+    75%{
+        box-shadow: 0 0 4px 4px #a62727;
+    }
+}

@@ -73,7 +73,7 @@ export default function MyOffers() {
                             success &&
                             <div className={"error-message"}
                                  style={{fontSize: "2.5em", marginTop: "50px", backgroundColor: ""}}>
-                                Your don't have any offer.
+                                You don't have any offer.
                             </div>
                         }
                     </div>

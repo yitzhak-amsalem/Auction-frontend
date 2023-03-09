@@ -21,6 +21,12 @@ img {
 div > p {
     margin: 8px;
 }
+div > p > p {
+    margin: 8px;
+}
+div > p > p > p {
+    margin: 8px;
+}
 
 .product-page{
     display: flex;

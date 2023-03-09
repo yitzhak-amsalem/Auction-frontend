@@ -63,7 +63,7 @@ export default function MyProducts() {
                             success &&
                             <div className={"error-message"}
                                  style={{fontSize: "2.5em", marginTop: "50px", backgroundColor: ""}}>
-                                Your don't have any product.
+                                You don't have any product.
                             </div>
                         }
                     </div>

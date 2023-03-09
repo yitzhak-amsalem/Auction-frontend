@@ -44,11 +44,15 @@
   width: 40px;
   text-align: center;
   border-radius: 45%;
+  cursor: auto;
+
 }
-#title-username:hover{
+#title-username:enabled:hover{
   background-color: #881212;
   color: #f89e9e;
   transition: all 500ms;
+  cursor: pointer;
+
 }
 
 
