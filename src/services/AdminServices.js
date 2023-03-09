@@ -26,3 +26,4 @@ export const getAllUsers = (token, callback) => {
             }
         })
 }
+

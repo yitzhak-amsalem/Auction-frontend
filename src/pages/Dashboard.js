@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {getAllAuctions, getAuctionTable} from "../services/GetAdmins";
+import {getAllAuctions, getAuctionTable} from "../services/AdminServices";
 import DrawProduct from "../components/DrawProduct";
 
 export default function Dashboard() {

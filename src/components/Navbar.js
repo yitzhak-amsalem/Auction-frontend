@@ -14,7 +14,7 @@ export default function Navbar() {
     const [username, setUsername] = useState("")
     const [success, setSuccess] = useState(false)
     const navigate = useNavigate();
-    const { updateNavbar, setUpdateNavbar } = useContext(AuthContext);
+    const {updateNavbar, setUpdateNavbar} = useContext(AuthContext);
 
     useEffect(() => {
         const token = Cookies.get("token")
@@ -48,42 +48,46 @@ export default function Navbar() {
 
     return (
         <nav className="nav">
-            {
-                success ?
-                    <>
-                        <ul>
-                            <CustomLink to="/my-products">My Products</CustomLink>
-                            <CustomLink to="/my-offers">My Offers</CustomLink>
+            <div>
+                {
+                    success ?
+                        <>
                             {
-                                isAdmin &&
-                                <CustomLink to="/admin-control">Admin Control</CustomLink>
+                                !isAdmin &&
+                                <ul>
+                                    <CustomLink to="/my-products">My Products</CustomLink>
+                                    <CustomLink to="/my-offers">My Offers</CustomLink>
+                                </ul>
                             }
+                        </>
+                        :
+                        <ul>
+                            <CustomLink to="/sign-up">SignUp</CustomLink>
+                            <CustomLink to="/login">Login</CustomLink>
                         </ul>
-
-                        <div className="site-title">
+                }
+            </div>
+            <div className="site-title">
+                {
+                    success &&
+                        <div>
                             <button className="title-element" id={"title-username"} onClick={goToDashboard}>
                                 {username.slice(0, 1).toUpperCase()}
                             </button>
                             <span className="title-element" id={"title-credit"}>
-                                Your Credit: {credit} $
+                                {isAdmin ? "System" : "Your"} Credit: {credit} $
                             </span>
                             <button className="title-element" id={"title-button"} onClick={logOut}>
                                 Log Out
                             </button>
                         </div>
-                    </>
-                    :
-                    <ul>
-                        <CustomLink to="/sign-up">SignUp</CustomLink>
-                        <CustomLink to="/login">Login</CustomLink>
-                    </ul>
-            }
-            <div className="site-title">
-
-            <a className="title-element" rel="noopener noreferrer" target={"_blank"} href={projectUrl}
-               id={"title"}>
-                DEY Auctions LTD
-            </a>
+                }
+                <div>
+                    <a className="title-element" rel="noopener noreferrer" target={"_blank"} href={projectUrl}
+                       id={"title"}>
+                        DEY Auctions LTD
+                    </a>
+                </div>
             </div>
         </nav>
     )

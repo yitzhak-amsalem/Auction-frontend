@@ -92,7 +92,6 @@
 #title:hover{
   color: #f3abab;
   text-shadow: 0 0 50px #fca0a0;
-
 }
 
 .nav ul {
@@ -115,22 +114,13 @@
 
 .nav li.active {
   background-color: #720000;
-
 }
 
 .nav li:hover {
   transition: all 500ms;
   background-color: #720000;
 }
-.admin-page{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 30px;
-  margin-left: 30px;
-  text-align: center;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
