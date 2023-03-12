@@ -43,7 +43,7 @@ export default function Navbar() {
     }
 
     const goToDashboard = () => {
-        navigate("../dashboard");
+        navigate(isAdmin ? "/admin-control" : "../dashboard");
     }
 
     return (
@@ -71,7 +71,7 @@ export default function Navbar() {
                 {
                     success &&
                         <div>
-                            <button className="title-element" id={"title-username"} disabled={isAdmin} onClick={goToDashboard}>
+                            <button className="title-element" id={"title-username"} onClick={goToDashboard}>
                                 {username.slice(0, 1).toUpperCase()}
                             </button>
                             <span className="title-element" id={"title-credit"}>

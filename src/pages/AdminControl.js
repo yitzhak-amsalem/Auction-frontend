@@ -40,7 +40,7 @@ export default function AdminControl() {
         }
         getAllAuctions(token, (response) => {
             if (response.data.success) {
-                //setAuctions(response.data.allAuctions)
+                setAuctions(response.data.allAuctions)
             }
             setSuccess(response.data.success)
         })
@@ -141,10 +141,12 @@ export default function AdminControl() {
                             {
                                 auctions.map((auction, i) => {
                                     return (
-                                        <tr style={{cursor: "pointer"}} onClick={() => goToProduct(auction.productID)}
+                                        <tr style={{cursor: "pointer"}} onClick={() => goToProduct(auction.productObj.productID)}
                                             key={i}>
-                                            <td>{auction.productName}</td>
-                                            <td>{auction.productImage}</td>
+                                            <td>{auction.productObj.name}</td>
+                                            <td>
+                                                <img style={{width: "100px", height: "100px"}} src={auction.productObj.imageLink}/>
+                                            </td>
                                             <td>{auction.openingDate}</td>
                                             <td>{auction.sumOffers}</td>
                                         </tr>
