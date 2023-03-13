@@ -121,8 +121,9 @@ export default function Product() {
                             auction.isOpen ?
                                 auction.productObj.owner.username === username ?
                                     <div>
-                                    <button className={"button"} disabled={auction.sumOffers < 3}
-                                            onClick={closeAuction}>Close Auction</button>
+                                        <button className={"button"} disabled={auction.sumOffers < 3}
+                                                onClick={closeAuction}>Close Auction
+                                        </button>
                                         {
                                             (success && errorCode === null) ?
                                                 <div className={"success-message"}>The auction close successfully</div>
@@ -157,9 +158,7 @@ export default function Product() {
                                         </button>
                                         {
                                             (success && errorCode === null) ?
-                                                <>
-                                                    <div className={"success-message"}>The offer send successfully</div>
-                                                </>
+                                                <div className={"success-message"}>The offer send successfully</div>
                                                 :
                                                 errorCode > 0 &&
                                                 <ErrorMessage errorCode={errorCode} lineBreak={true}/>

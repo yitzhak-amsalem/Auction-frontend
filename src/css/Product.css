@@ -50,12 +50,14 @@ div > p > p > p {
     padding: 7px;
     background-color: #fab2b2;
     border-radius: 10px;
+    cursor: auto;
 }
 
 .button:hover:enabled{
     background-color: #790000;
     transition: all 500ms;
     color: white;
+    cursor: pointer;
 }
 
 .success-message{

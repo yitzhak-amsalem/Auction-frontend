@@ -50,6 +50,9 @@ function ErrorMessage(props) {
         case 1015:
             message = "Can't close this auction, Less than 3 offers";
             break;
+        case 1016:
+            message = "Can't resolve negative price";
+            break;
         default:
             message = "null error"
             break;
