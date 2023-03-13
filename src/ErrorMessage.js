@@ -41,7 +41,18 @@ function ErrorMessage(props) {
         case 1012:
             message = "Amount lower than minimum price.";
             break;
-
+        case 1013:
+            message = "Your not owner of this auction";
+            break;
+        case 1014:
+            message = "Auction already closed";
+            break;
+        case 1015:
+            message = "Can't close this auction, Less than 3 offers";
+            break;
+        default:
+            message = "null error"
+            break;
     }
     return (
         <span className={"error-message"}>

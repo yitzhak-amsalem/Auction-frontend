@@ -66,6 +66,20 @@ export default function Product() {
             }
         })
     }
+    const closeAuction = () => {
+        sendApiPostRequest("http://localhost:8989/close-auction", {token, productID}, (response) => {
+            setSuccess(response.data.success)
+            setErrorCode(response.data.errorCode)
+            setTimeout(() => {
+                setSuccess(false)
+                setErrorCode(0)
+                updateAuction(token)
+            }, 2000)
+            if (response.data.success) {
+                setUpdateNavbar(true)
+            }
+        })
+    }
 
     return (
         <div className={"product-page"}>
@@ -98,46 +112,59 @@ export default function Product() {
                                                 :
                                                 <p>You have not yet bid on this product</p>
                                         }
-                                        <p style={{display: "block"}}>Auction Owner: {auction.productObj.owner.username}</p>
+                                        <p style={{display: "block"}}>Auction
+                                            Owner: {auction.productObj.owner.username}</p>
                                     </p>
                             }
                         </p>
                         {
                             auction.isOpen ?
-                                auction.productObj.owner.username !== username &&
-                                <div style={{
-                                    margin: "15px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    flexDirection: "column"
-                                }}>
-                                    <TextField
-                                        id="outlined-number"
-                                        label="Enter a new offer"
-                                        type={"number"}
-                                        size={"medium"}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        onChange={(e) => setAmount(e.target.value)}
-                                        value={amount}
-                                        variant="filled"
-                                    />
-                                    <button className={"button"} onClick={makeAnOffer}
-                                            disabled={amount <= 0 || amount <= Math.max(...auction.myOffers.map(offer => offer.amountOffer))}>Send
-                                        Offer
-                                    </button>
-                                    {
-                                        (success && errorCode === null) ?
-                                            <>
-                                                <div className={"success-message"}>The offer send successfully</div>
-                                            </>
-                                            :
-                                            errorCode > 0 &&
-                                            <ErrorMessage errorCode={errorCode} lineBreak={true}/>
-                                    }
-                                </div>
+                                auction.productObj.owner.username === username ?
+                                    <div>
+                                    <button className={"button"} disabled={auction.sumOffers < 3}
+                                            onClick={closeAuction}>Close Auction</button>
+                                        {
+                                            (success && errorCode === null) ?
+                                                <div className={"success-message"}>The auction close successfully</div>
+                                                :
+                                                errorCode > 0 &&
+                                                <ErrorMessage errorCode={errorCode} lineBreak={true}/>
+                                        }
+                                    </div>
+                                    :
+                                    <div style={{
+                                        margin: "15px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        flexDirection: "column"
+                                    }}>
+                                        <TextField
+                                            id="outlined-number"
+                                            label="Enter a new offer"
+                                            type={"number"}
+                                            size={"medium"}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                            onChange={(e) => setAmount(e.target.value)}
+                                            value={amount}
+                                            variant="filled"
+                                        />
+                                        <button className={"button"} onClick={makeAnOffer}
+                                                disabled={amount <= 0 || amount <= Math.max(...auction.myOffers.map(offer => offer.amountOffer))}>Send
+                                            Offer
+                                        </button>
+                                        {
+                                            (success && errorCode === null) ?
+                                                <>
+                                                    <div className={"success-message"}>The offer send successfully</div>
+                                                </>
+                                                :
+                                                errorCode > 0 &&
+                                                <ErrorMessage errorCode={errorCode} lineBreak={true}/>
+                                        }
+                                    </div>
                                 :
                                 <div style={{fontSize: "1.5em", fontWeight: "bold"}}>The auction is closed</div>
                         }
