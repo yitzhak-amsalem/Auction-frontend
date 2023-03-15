@@ -6,6 +6,8 @@ import ErrorMessage from "../ErrorMessage";
 import {sendApiPostRequest} from "../services/ApiUserRequests";
 import {AuthContext} from "../components/AuthProvider";
 import {getUserDetails} from "../services/GetUserDetails";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 export default function MyProducts() {
     const [myProducts, setMyProducts] = useState([]);
@@ -131,16 +133,65 @@ export default function MyProducts() {
                         {
                             addMoreAuction &&
                             <div>
-                                <div>Product Name: <input value={productName}
-                                                          onChange={(e) => setProductName(e.target.value)}/>
-                                </div>
-                                <div>Description: <input value={description}
-                                                         onChange={(e) => setDescription(e.target.value)}/>
-                                </div>
-                                <div>Image Link: <input value={imageLink}
-                                                        onChange={(e) => setImageLink(e.target.value)}/></div>
-                                <div>Price: <input type={"number"} min={0} value={price}
-                                                   onChange={(e) => setPrice(e.target.value)}/></div>
+                                <Box
+                                    component="form"
+                                    sx={{
+                                        '& .MuiTextField-root': {m: 1, width: '25ch'},
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <div>
+                                        <div>
+                                            <TextField
+                                                id="filled-required"
+                                                label="Product Name"
+                                                type="text"
+                                                variant="filled"
+                                                required={true}
+                                                value={productName}
+                                                onChange={(e) => setProductName(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <TextField
+                                                id="filled-required"
+                                                label="Description"
+                                                type="text"
+                                                variant="filled"
+                                                required={true}
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <TextField
+                                                id="filled-required"
+                                                label="Image Link"
+                                                type="text"
+                                                variant="filled"
+                                                required={true}
+                                                value={imageLink}
+                                                onChange={(e) => setImageLink(e.target.value)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <TextField
+                                                id="filled-number"
+                                                label="Price"
+                                                type="number"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                    required: true
+                                                }}
+                                                variant="filled"
+                                                value={price}
+                                                onChange={(e) => setPrice(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                </Box>
                                 <button className={"button"}
                                         disabled={productName === "" || description === "" || imageLink === ""}
                                         onClick={addAuction}>Save
