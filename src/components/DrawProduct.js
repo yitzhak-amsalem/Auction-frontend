@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Product.css"
 
-export default function DrawProduct({ productToPaint }) {
+export default function DrawProduct({productToPaint}) {
     const product = productToPaint;
     return (
         <div id={"product-container"}>

@@ -20,6 +20,7 @@ export default function Product() {
     const [auction, setAuction] = useState(undefined)
     const [username, setUsername] = useState("")
     const {setUpdateNavbar} = useContext(AuthContext);
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const updateAuction = () => {
         const token = Cookies.get("token");
@@ -36,6 +37,7 @@ export default function Product() {
         })
         getUserDetails(token, (response) => {
             if (response.data.success) {
+                setIsAdmin(response.data.admin)
                 setUsername(response.data.username)
             }
         })
@@ -89,32 +91,34 @@ export default function Product() {
                         <DrawProduct productToPaint={auction.productObj}/>
                         <p>Opening Date: {auction.openingDate}</p>
                         <p>Sum offers: {auction.sumOffers}</p>
+                        <p>Min price: {auction.productObj.price}</p>
                         <p>
                             {
                                 auction.productObj.owner.username === username ?
-                                    <p> Your the owner of this auction </p>
+                                    <span> Your the owner of this auction </span>
                                     :
-                                    <p>
+                                    <span>
+                                        <span style={{display: "block", marginBottom: "10px"}}>Auction
+                                            Owner: {auction.productObj.owner.username}
+                                        </span>
                                         {
                                             auction.myOffers.length > 0 ?
                                                 <>
-                                                    <p style={{fontWeight: "bold"}}>My Offers:</p>
+                                                    <span style={{fontWeight: "bold"}}>My last Offers:</span>
                                                     {
                                                         auction.myOffers.map((offer, i) => {
                                                             return (
-                                                                <p key={i} style={{display: "block", margin: "5px"}}>
+                                                                <span key={i} style={{display: "block", margin: "5px"}}>
                                                                     {(i + 1) + ". " + offer.amountOffer}
-                                                                </p>
+                                                                </span>
                                                             )
                                                         })
                                                     }
                                                 </>
                                                 :
-                                                <p>You have not yet bid on this product</p>
+                                                <span>You have not yet offer on this product</span>
                                         }
-                                        <p style={{display: "block"}}>Auction
-                                            Owner: {auction.productObj.owner.username}</p>
-                                    </p>
+                                    </span>
                             }
                         </p>
                         {
@@ -133,37 +137,42 @@ export default function Product() {
                                         }
                                     </div>
                                     :
-                                    <div style={{
-                                        margin: "15px",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        flexDirection: "column"
-                                    }}>
-                                        <TextField
-                                            id="outlined-number"
-                                            label="Enter a new offer"
-                                            type={"number"}
-                                            size={"medium"}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            onChange={(e) => setAmount(e.target.value)}
-                                            value={amount}
-                                            variant="filled"
-                                        />
-                                        <button className={"button"} onClick={makeAnOffer}
-                                                disabled={amount <= 0 || amount <= Math.max(...auction.myOffers.map(offer => offer.amountOffer))}>Send
-                                            Offer
-                                        </button>
-                                        {
-                                            (success && errorCode === null) ?
-                                                <div className={"success-message"}>The offer send successfully</div>
-                                                :
-                                                errorCode > 0 &&
-                                                <ErrorMessage errorCode={errorCode} lineBreak={true}/>
-                                        }
-                                    </div>
+                                    isAdmin ?
+                                        <div style={{fontSize: "1.5em", fontWeight: "bold"}}>
+                                            Admin can't make offers.
+                                        </div>
+                                        :
+                                        <div style={{
+                                            margin: "15px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            flexDirection: "column"
+                                        }}>
+                                            <TextField
+                                                id="outlined-number"
+                                                label="Enter a new offer"
+                                                type={"number"}
+                                                size={"medium"}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                onChange={(e) => setAmount(e.target.value)}
+                                                value={amount}
+                                                variant="filled"
+                                            />
+                                            <button className={"button"} onClick={makeAnOffer}
+                                                    disabled={amount <= Math.max(...auction.myOffers.map(offer => offer.amountOffer)) || amount < auction.productObj.price}>
+                                                Send Offer
+                                            </button>
+                                            {
+                                                (success && errorCode === null) ?
+                                                    <div className={"success-message"}>The offer send successfully</div>
+                                                    :
+                                                    errorCode > 0 &&
+                                                    <ErrorMessage errorCode={errorCode} lineBreak={true}/>
+                                            }
+                                        </div>
                                 :
                                 <div style={{fontSize: "1.5em", fontWeight: "bold"}}>The auction is closed</div>
                         }

@@ -3,23 +3,26 @@
 .admin-page{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-right: 30px;
-    margin-left: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-right: 15px;
+    margin-left: 15px;
     text-align: center;
 }
-.my-details-table-admin{
-    width: 40%;
-    margin-top: 8%;
+.auction-table-admin{
+    width: 60%;
+    margin-top: 2%;
     border-radius: 15%;
+    font-size: 0.7em;
+}
 
+.users-table-admin{
+    width: 35%;
+    margin-top: 2%;
+    border-radius: 15%;
+    font-size: 0.7em;
 }
-.dropdown{
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    z-index: 1;
-}
+
 #user-details{
     display: flex;
     margin: 0;
@@ -41,14 +44,12 @@
     font-size: 0.9em;
     padding: 10px;
     margin-left: 10px;
-}
-p{
-    display: inline;
-    margin: 0;
+    cursor: auto;
 }
 
-.update-button:hover{
+.update-button:hover:enabled{
     background-color: #881212;
     color: #f89e9e;
     transition: all 500ms;
+    cursor: pointer;
 }

@@ -52,7 +52,10 @@ function Login() {
                 }
             })
         } else {
-            sendApiPostRequest("http://localhost:8989/login-as-admin", {username: userName, password: password}, (response) => {
+            sendApiPostRequest("http://localhost:8989/login-as-admin", {
+                username: userName,
+                password: password
+            }, (response) => {
                 if (response.data.success) {
                     Cookies.set("token", response.data.token);
                     setUpdateNavbar(true)
@@ -77,19 +80,17 @@ function Login() {
     const typeChanged = (event) => {
         setType(event.target.value);
     }
-    const signup = () => {
-        navigate("../sign-up")
-    }
+
     return (
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between"}}>
             <div className={"login-form"}>
                 <h1>Login Form</h1>
                 <div className={"login-type"}>
                  <span style={{marginRight: "5px"}}>
-                     <input type={"radio"} name={"type"} value={"login"}
-                            checked={type === "login"} onChange={typeChanged} />Login
+                     <input type={"radio"} name={"type"} value={"login"} style={{cursor: "pointer"}}
+                            checked={type === "login"} onChange={typeChanged}/>Login
                  </span>
-                    <input type={"radio"} name={"type"} value={"login as admin"}
+                    <input type={"radio"} name={"type"} value={"login as admin"} style={{cursor: "pointer"}}
                            checked={type === "login as admin"} onChange={typeChanged}/>Login as admin
                 </div>
                 <div className={"login-container"}>
@@ -117,18 +118,16 @@ function Login() {
                         errorCode > 0 &&
                         <ErrorMessage errorCode={errorCode} lineBreak={true}/>
                     }
-                    <button className={"sign-button"} disabled={userName.length === 0 || password.length === 0}
-                            onClick={submit}>Sign In
-                    </button>
-                    <button className={"sign-button"}
-                            onClick={signup}>Create new account
+                    <button style={{marginRight: "5px"}} className={"sign-button"}
+                            disabled={userName.length === 0 || password.length === 0}
+                            onClick={submit}>Log In
                     </button>
                 </div>
             </div>
             <div className={"live-stats"}>
                 <h2>{numOfUsers} users are in the system</h2>
-                <h2>{numOfAuctions} auction are uploded to the system</h2>
-                <h2 style={{borderRight: "none"}}>{numOfOffers} Bets were auctioned in the system</h2>
+                <h2>{numOfAuctions} auction are in the system</h2>
+                <h2 style={{borderRight: "none"}}>{numOfOffers} offers are in the system</h2>
             </div>
         </div>
     )

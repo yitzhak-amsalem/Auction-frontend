@@ -1,6 +1,6 @@
 function ErrorMessage(props) {
     const errorCode = props.errorCode;
-    let message = "";
+    let message;
     switch (errorCode) {
         case 1000:
             message = "Username is required!";
@@ -52,6 +52,12 @@ function ErrorMessage(props) {
             break;
         case 1016:
             message = "Can't resolve negative price";
+            break;
+        case 1017:
+            message = "Admin can't make offer";
+            break;
+        case 1018:
+            message = "Admin can't make user's actions";
             break;
         default:
             message = "null error"

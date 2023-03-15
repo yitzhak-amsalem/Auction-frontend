@@ -9,9 +9,6 @@ import "../css/Admin.css"
 export default function AdminControl() {
     const [allUsers, setAllUsers] = useState([]);
     const [auctions, setAuctions] = useState([]);
-    const [token, setToken] = useState()
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [username, setUsername] = useState("")
     const [success, setSuccess] = useState(false)
     const navigate = useNavigate();
     const [selectedUser, setSelectedUser] = useState(null);
@@ -28,28 +25,25 @@ export default function AdminControl() {
             getUserDetails(token, (response) => {
                 if (response.data.success) {
                     if (!response.data.admin) {
-                        navigate("../login");
+                        navigate("../dashboard");
                     } else {
-                        setUsername(response.data.username)
-                        setIsAdmin(response.data.admin)
-                        setToken(token)
+                        getAllAuctions(token, (response) => {
+                            if (response.data.success) {
+                                setAuctions(response.data.allAuctions)
+                            }
+                            setSuccess(response.data.success)
+                        })
+                        getAllUsers(token, (response) => {
+                            if (response.data.success) {
+                                setAllUsers(response.data.users)
+                            }
+                            setSuccess(response.data.success)
+                        })
                     }
                 }
                 setSuccess(response.data.success)
             })
         }
-        getAllAuctions(token, (response) => {
-            if (response.data.success) {
-                setAuctions(response.data.allAuctions)
-            }
-            setSuccess(response.data.success)
-        })
-        getAllUsers(token, (response) => {
-            if (response.data.success) {
-                setAllUsers(response.data.users)
-            }
-            setSuccess(response.data.success)
-        })
     }, []);
 
     const goToProduct = (productID) => {
@@ -62,15 +56,14 @@ export default function AdminControl() {
 
     return (
         <div className={"admin-page"}>
-            <div className={"my-details-table my-details-table-admin"}>
+            <div className={"my-details-table users-table-admin"}>
                 {
                     allUsers.length > 0 ?
                         <table style={{
-                            width: "50%",
                             borderRadius: "15px"
                         }}>
                             <thead>
-                            <tr id={"table-row-header"}>
+                            <tr id={"table-row-header"} style={{fontSize: "1em"}}>
                                 <th style={{borderRight: "none"}} className={"border-header"}>Users</th>
                             </tr>
                             </thead>
@@ -83,7 +76,7 @@ export default function AdminControl() {
                                                 cursor: "pointer",
                                                 backgroundColor: user === selectedUser ? "#AB0101FF" : "",
                                                 color: user === selectedUser && "white",
-                                                borderBottom:(i + 1 < allUsers.length) && "1px solid #AB0101FF",
+                                                borderBottom: (i + 1 < allUsers.length) && "1px solid #AB0101FF",
                                             }}
                                                 onClick={() => handleUserClick(user)}
                                                 key={i}>
@@ -93,7 +86,7 @@ export default function AdminControl() {
                                                         <span>&#8595;</span>
                                                         :
                                                         <span>&#8593;</span>
-                                                    }
+                                                }
                                                 </td>
                                             </tr>
                                             <tr style={{
@@ -101,7 +94,9 @@ export default function AdminControl() {
                                                 color: "black",
                                             }}>
                                                 {
-                                                    selectedUser === user && <UserDetails updateUserCredit={(amount) => updateUserCredit(user, amount)} user={selectedUser}/>
+                                                    selectedUser === user && <UserDetails
+                                                        updateUserCredit={(amount) => updateUserCredit(user, amount)}
+                                                        user={selectedUser}/>
                                                 }
                                             </tr>
                                         </>
@@ -122,15 +117,14 @@ export default function AdminControl() {
                         </div>
                 }
             </div>
-            <div className={"my-details-table my-details-table-admin"}>
+            <div className={"my-details-table auction-table-admin"}>
                 {
                     auctions.length > 0 ?
                         <table style={{
-                            width: "50%",
                             borderRadius: "15px"
                         }}>
                             <thead>
-                            <tr id={"table-row-header"}>
+                            <tr id={"table-row-header"} style={{fontSize: "1em"}}>
                                 <th className={"border-header"}>product name</th>
                                 <th className={"border-header"}>product image</th>
                                 <th className={"border-header"}>opening date</th>
@@ -141,11 +135,21 @@ export default function AdminControl() {
                             {
                                 auctions.map((auction, i) => {
                                     return (
-                                        <tr style={{cursor: "pointer"}} onClick={() => goToProduct(auction.productObj.productID)}
+                                        <tr style={{cursor: "pointer", padding: "0px"}}
+                                            onClick={() => goToProduct(auction.productObj.productID)}
                                             key={i}>
                                             <td>{auction.productObj.name}</td>
                                             <td>
-                                                <img style={{width: "100px", height: "100px"}} src={auction.productObj.imageLink}/>
+                                                <img
+                                                    style={{
+                                                        width: "80px",
+                                                        height: "80px",
+                                                        border: "none",
+                                                        padding: "0px",
+                                                        margin: "0px"
+                                                    }}
+                                                    alt={auction.productObj.description}
+                                                    src={auction.productObj.imageLink}/>
                                             </td>
                                             <td>{auction.openingDate}</td>
                                             <td>{auction.sumOffers}</td>

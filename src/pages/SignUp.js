@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, {useState, useEffect} from "react";
 import "../css/logIn.css";
 import ErrorMessage from "../ErrorMessage";
@@ -7,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {TextField} from "@mui/material";
 
-function signUp() {
+function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
@@ -103,7 +102,9 @@ function signUp() {
                     {
                         success ?
                             <>
-                                <div className={"success-message"}>Sign Up successfully. You are taken to the login page</div>
+                                <div className={"success-message"}>Sign Up successfully. You are taken to the login
+                                    page
+                                </div>
                             </>
                             :
                             errorCode > 0 &&
@@ -121,4 +122,4 @@ function signUp() {
     )
 }
 
-export default signUp;
+export default SignUp;

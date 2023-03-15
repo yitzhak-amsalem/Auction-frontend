@@ -13,16 +13,3 @@ export const getUserDetails = (token, callback) => {
             }
         })
 }
-export const getAdminCredit = (token, callback) => {
-    axios.get("http://localhost:8989/get-admin-credit",
-        {
-            params: {
-                token
-            }
-        })
-        .then(response => {
-            if (callback) {
-                callback(response);
-            }
-        })
-}

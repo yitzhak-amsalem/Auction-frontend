@@ -3,7 +3,7 @@
 .login-form{
     border: 2px solid rgba(248, 89, 89, 0.5);
     border-radius: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 5px;
     background-color: rgba(250, 214, 214, 0.7);
     box-shadow: 0 0 15px #b25252;
@@ -14,12 +14,12 @@
 .login-type{
     font-family: 'Chivo Mono', monospace;
     color: rgb(168, 4, 4);
-
 }
+
 .login-container {
     border-radius: 15px;
     margin: 5px;
-    padding: 50px;
+    padding: 20px;
     background-color: rgba(250, 233, 233, 0.5);
     border: 1px solid rgba(203, 55, 55, 0.4);
     display: flex;
@@ -30,10 +30,11 @@
 h1 {
     font-family: 'Chivo Mono', monospace;
     color: rgb(121, 5, 5);
-    font-size: 2.2em;
+    font-size: 2.1em;
     text-align: center;
-    margin: 15px 0 5px 15px;
+    margin: 5px;
 }
+
 h2 {
     font-family: 'Chivo Mono', monospace;
     color: rgb(169, 5, 5);
@@ -53,11 +54,13 @@ button {
 }
 
 .sign-button {
-    margin-top: 30px;
+    margin: 5px;
     font-family: 'Chivo Mono', monospace;
     border: none;
+    border-radius: 10px;
     background-color: #e18f8f;
     cursor: auto;
+    font-size: 1em;
 }
 
 .sign-button:hover:enabled {
@@ -66,6 +69,7 @@ button {
     color: white;
     cursor: pointer;
 }
+
 .live-stats {
     display: flex;
     flex-direction: row;
@@ -79,19 +83,17 @@ button {
     background-color: rgba(239, 201, 201, 0.65);
     box-shadow: 0 0 4px 4px #a62727;
 }
+
 @keyframes color-change {
     0%,100%{
         box-shadow: 0 0 4px 4px #7e1414;
     }
-
     25%{
         box-shadow: 0 0 4px 4px #cc6565;
     }
-
     50%{
         box-shadow: 0 0 4px 4px #dc8d8d;
     }
-
     75%{
         box-shadow: 0 0 4px 4px #a62727;
     }
