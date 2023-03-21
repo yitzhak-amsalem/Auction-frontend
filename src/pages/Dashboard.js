@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {getAllAuctions} from "../services/AdminServices";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
@@ -10,15 +10,25 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {AuthContext} from "../components/AuthProvider";
 
 export default function Dashboard() {
     const [auctions, setAuctions] = useState([]);
     const [searchProduct, setSearchProduct] = useState("")
     const [success, setSuccess] = useState(false)
     const [username, setUsername] = useState("")
-    const notify = (message) => toast(message);
+    const {setUpdateNavbar} = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const getAuctions = () => {
+        const token = Cookies.get("token")
+        getAllAuctions(token, (response) => {
+            if (response.data.success) {
+                setAuctions(response.data.allAuctions)
+            }
+            setSuccess(response.data.success)
+        })
+    }
     useEffect(() => {
         const token = Cookies.get("token")
         if (token === undefined) {
@@ -30,12 +40,7 @@ export default function Dashboard() {
                         navigate("../admin-control");
                     } else {
                         setUsername(response.data.username)
-                        getAllAuctions(token, (response) => {
-                            if (response.data.success) {
-                                setAuctions(response.data.allAuctions)
-                            }
-                            setSuccess(response.data.success)
-                        })
+                        getAuctions()
                     }
                 }
                 setSuccess(response.data.success)
@@ -48,10 +53,14 @@ export default function Dashboard() {
                     notify("Someone added a new offer!")
                 } else if (data === "CLOSE_AUCTION") {
                     notify("Auction that you offered is closed!")
+                    setUpdateNavbar(true)
                 }
+                getAuctions()
             }
         }
     }, []);
+
+    const notify = (message) => toast(message);
 
     const goToProduct = (productID) => {
         navigate(`/product/${productID}`)
