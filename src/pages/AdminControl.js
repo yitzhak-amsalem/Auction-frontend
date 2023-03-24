@@ -10,6 +10,8 @@ export default function AdminControl() {
     const [allUsers, setAllUsers] = useState([]);
     const [auctions, setAuctions] = useState([]);
     const [success, setSuccess] = useState(false)
+    const [sortedByName, setSortedByName] = useState(false)
+    const [sortedByDate, setSortedByDate] = useState(false)
     const navigate = useNavigate();
     const [selectedUser, setSelectedUser] = useState(null);
 
@@ -53,15 +55,29 @@ export default function AdminControl() {
     const updateUserCredit = (user, amount) => {
         user.credit = amount
     }
+    const sortByName = () => {
+        setSortedByName(!sortedByName)
+        setSortedByDate(false)
+        sortedByName ?
+            auctions.sort((b, a) => a.productObj.name.localeCompare(b.productObj.name))
+            :
+            auctions.sort((a, b) => a.productObj.name.localeCompare(b.productObj.name))
+    }
+    const sortByDate = () => {
+        setSortedByDate(!sortedByDate)
+        setSortedByName(false)
+        sortedByDate ?
+            auctions.sort((b, a) => a.openingDate.localeCompare(b.openingDate))
+            :
+            auctions.sort((a, b) => a.openingDate.localeCompare(b.openingDate))
+    }
 
     return (
         <div className={"admin-page"}>
             <div className={"my-details-table users-table-admin"}>
                 {
                     allUsers.length > 0 ?
-                        <table style={{
-                            borderRadius: "15px"
-                        }}>
+                        <table>
                             <thead>
                             <tr id={"table-row-header"} style={{fontSize: "1em"}}>
                                 <th style={{borderRight: "none"}} className={"border-header"}>Users</th>
@@ -76,7 +92,7 @@ export default function AdminControl() {
                                                 cursor: "pointer",
                                                 backgroundColor: user === selectedUser ? "#AB0101FF" : "",
                                                 color: user === selectedUser && "white",
-                                                borderBottom: (i + 1 < allUsers.length) && "1px solid #AB0101FF",
+                                                borderBottom: (i + 1 < allUsers.length) && "1px solid #AB0101FF"
                                             }}
                                                 onClick={() => handleUserClick(user)}
                                                 key={i}>
@@ -92,6 +108,7 @@ export default function AdminControl() {
                                             <tr style={{
                                                 backgroundColor: "#fce0e0",
                                                 color: "black",
+                                                borderBottom: (i + 1 < allUsers.length) && "1px solid #AB0101FF"
                                             }}>
                                                 {
                                                     selectedUser === user && <UserDetails
@@ -120,14 +137,26 @@ export default function AdminControl() {
             <div className={"my-details-table auction-table-admin"}>
                 {
                     auctions.length > 0 ?
-                        <table style={{
-                            borderRadius: "15px"
-                        }}>
+                        <table>
                             <thead>
                             <tr id={"table-row-header"} style={{fontSize: "1em"}}>
-                                <th className={"border-header"}>product name</th>
-                                <th className={"border-header"}>product image</th>
-                                <th className={"border-header"}>opening date</th>
+                                <th onClick={sortByName} className={"border-header border-header-sort"}>
+                                    Product name {
+                                    sortedByName ?
+                                        <span>&#8595;</span>
+                                        :
+                                        <span>&#8593;</span>
+                                }
+                                </th>
+                                <th className={"border-header"}>Product image</th>
+                                <th onClick={sortByDate} className={"border-header border-header-sort"}>
+                                    Opening date {
+                                    sortedByDate ?
+                                        <span>&#8595;</span>
+                                        :
+                                        <span>&#8593;</span>
+                                }
+                                </th>
                                 <th className={"border-header"}>sum offers</th>
                             </tr>
                             </thead>

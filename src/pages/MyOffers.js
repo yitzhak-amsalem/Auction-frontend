@@ -51,10 +51,10 @@ export default function MyOffers() {
                         <table>
                             <thead>
                             <tr id={"table-row-header"}>
-                                <th className={"border-header"}>product</th>
-                                <th className={"border-header"}>amount</th>
-                                <th className={"border-header"}>open</th>
-                                <th className={"border-header"}>win</th>
+                                <th className={"border-header"}>Product</th>
+                                <th className={"border-header"}>Amount</th>
+                                <th className={"border-header"}>Status</th>
+                                <th className={"border-header"}>Win</th>
                             </tr>
                             </thead>
                             <tbody>

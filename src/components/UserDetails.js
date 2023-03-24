@@ -28,11 +28,11 @@ export default function UserDetails({user, updateUserCredit}) {
     }
     return (
         <p id={"user-details"}>
-            <p style={{margin: "8px"}}>Sum Auctions: {user.sumAuctions}</p>
+            <p style={{marginTop: "8px", marginBottom: 0}}>Sum Auctions: {user.sumAuctions}</p>
             <p id={"update"}>
                 {
                     editCredit ?
-                        <p>
+                        <p style={{margin: "8px"}}>
                             credit: <input style={{width: "80px"}} type={"number"} value={amount}
                                            onChange={(e) => setAmount(e.target.value)}
                         />
@@ -47,7 +47,7 @@ export default function UserDetails({user, updateUserCredit}) {
                             </button>
                         </p>
                         :
-                        <p>
+                        <p style={{margin: "8px"}}>
                             credit: {user.credit} $
                         </p>
                 }

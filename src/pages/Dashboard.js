@@ -16,6 +16,8 @@ export default function Dashboard() {
     const [auctions, setAuctions] = useState([]);
     const [searchProduct, setSearchProduct] = useState("")
     const [success, setSuccess] = useState(false)
+    const [sortedByName, setSortedByName] = useState(false)
+    const [sortedByDate, setSortedByDate] = useState(false)
     const [username, setUsername] = useState("")
     const {setUpdateNavbar} = useContext(AuthContext);
     const navigate = useNavigate();
@@ -66,6 +68,23 @@ export default function Dashboard() {
         navigate(`/product/${productID}`)
     }
 
+    const sortByName = () => {
+        setSortedByName(!sortedByName)
+        setSortedByDate(false)
+        sortedByName ?
+            auctions.sort((b, a) => a.productObj.name.localeCompare(b.productObj.name))
+            :
+            auctions.sort((a, b) => a.productObj.name.localeCompare(b.productObj.name))
+    }
+    const sortByDate = () => {
+        setSortedByDate(!sortedByDate)
+        setSortedByName(false)
+        sortedByDate ?
+            auctions.sort((b, a) => a.openingDate.localeCompare(b.openingDate))
+            :
+            auctions.sort((a, b) => a.openingDate.localeCompare(b.openingDate))
+    }
+
     return (
         <div className={"dashboard-page"}>
             {
@@ -92,13 +111,27 @@ export default function Dashboard() {
                 {
                     auctions.length > 0 ?
                         <table style={{
-                            borderRadius: "15px"
+                            borderRadius: "5px"
                         }}>
                             <thead>
                             <tr id={"table-row-header"}>
-                                <th className={"border-header"}>Product name</th>
+                                <th onClick={sortByName} className={"border-header border-header-sort"}>
+                                    Product name {
+                                    sortedByName ?
+                                        <span>&#8595;</span>
+                                        :
+                                        <span>&#8593;</span>
+                                }
+                                </th>
                                 <th className={"border-header"}>Product image</th>
-                                <th className={"border-header"}>Opening date</th>
+                                <th onClick={sortByDate} className={"border-header border-header-sort"}>
+                                    Opening date {
+                                    sortedByDate ?
+                                        <span>&#8595;</span>
+                                        :
+                                        <span>&#8593;</span>
+                                }
+                                </th>
                                 <th className={"border-header"}>My offers</th>
                                 <th className={"border-header"}>Sum offers</th>
                             </tr>

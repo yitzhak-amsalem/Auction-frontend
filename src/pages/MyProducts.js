@@ -8,6 +8,7 @@ import {AuthContext} from "../components/AuthProvider";
 import {getUserDetails} from "../services/GetUserDetails";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import CountUp from 'react-countup';
 
 export default function MyProducts() {
     const [myProducts, setMyProducts] = useState([]);
@@ -96,9 +97,9 @@ export default function MyProducts() {
                                 <table>
                                     <thead>
                                     <tr id={"table-row-header"}>
-                                        <th className={"border-header"}>product Name</th>
-                                        <th className={"border-header"}>max Amount</th>
-                                        <th className={"border-header"}>open</th>
+                                        <th className={"border-header"}>Product Name</th>
+                                        <th className={"border-header"}>Max Amount</th>
+                                        <th className={"border-header"}>Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -109,7 +110,10 @@ export default function MyProducts() {
                                                     onClick={() => goToProduct(product.productID)}
                                                     key={i}>
                                                     <td>{product.productName}</td>
-                                                    <td>{product.maxAmount === null ? "-" : product.maxAmount}</td>
+                                                    <td>{product.maxAmount === null ? "-" : <CountUp start={0}
+                                                                                                     end={product.maxAmount}
+                                                                                                     duration={1}
+                                                    />}</td>
                                                     <td>{product.isOpen ? "open" : "close"}</td>
                                                 </tr>
                                             )

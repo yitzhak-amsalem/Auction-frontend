@@ -12,20 +12,19 @@
 .auction-table-user{
     width: 100%;
     margin: 0;
-    border-radius: 15%;
     font-size: 1em;
 }
 
 table {
-    background-color: rgba(255, 202, 202, 0.8);
+    background-color: rgb(253, 227, 227);
     margin-top: 40px;
     min-width: 90%;
     border-collapse: collapse;
     font-family: Dosis, sans-serif;
     font-size: 1.2em;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0 0 50px rgba(171, 1, 1, 0.5);
+    box-shadow: 0 0 50px rgba(236, 134, 134, 0.5);
 }
 
 tr, td {
@@ -35,21 +34,26 @@ tr, td {
 .border-header {
     font-family: Chivo Mono, sans-serif;
     padding: 20px;
-    border-right: 2px outset rgba(169, 70, 70, 0.6);
+    border-right: 2px outset rgba(239, 204, 204, 0.1);
+}
+
+.border-header-sort:hover {
+    background-color: rgba(252, 66, 66, 0.96);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 th {
-    background-color: rgba(252, 66, 66, 0.96);
+    background-color: rgb(238, 108, 108);
     font-size: 1.1em;
 }
 
 tr:nth-child(even){
-    background-color: rgba(252, 167, 167, 0.92);
+    background-color: rgb(255, 219, 219);
 }
 
 tr:hover {
-    color: white;
-    background-color: rgb(171, 1, 1);
+    background-color: rgb(243, 151, 151);
 }
 
 #table-row-header:hover{

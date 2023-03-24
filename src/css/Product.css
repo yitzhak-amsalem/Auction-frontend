@@ -66,6 +66,7 @@ div > p > p > p {
     border-radius: 10px;
     align-items: center;
     align-content: center;
+    margin: 10px;
     padding: 7px;
     color: #1e8a13;
 }
